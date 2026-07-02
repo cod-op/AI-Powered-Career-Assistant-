@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist",
+    
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "target": "ES2020",
+    
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+
+    "sourceMap": false,
+    "declaration": false,
+    "declarationMap":false,
+    
+    // Server-side ke liye ye settings best hain
+    "lib": ["ES2020"],
+    "types": ["node"]
+  },
+  "include": ["src/**/*"]
+}
