@@ -9,6 +9,7 @@ import { useAppData } from "./context/AppContext.tsx"
 import Loading from "./components/Loading.tsx"
 import PublicRoutes from "./components/PublicRoutes.tsx"
 import ProtectedRoutes from "./components/ProtectedRoutes.tsx"
+import AnalysePage from "./pages/Analyse.tsx"
 
 const App = () => {
 
@@ -27,6 +28,7 @@ const { loading } = useAppData();
           </Route>
           <Route element={<ProtectedRoutes/>}>
             <Route path='/account' element={<Account/>}></Route>
+            <Route path='/analyse' element={<AnalysePage/>}></Route>
           </Route>
           <Route path='/register' element={<Register/>}></Route>
           

@@ -19,7 +19,7 @@ import {
   Upload,
 } from "lucide-react";
 
-import { ScoreRing } from "../ring";
+ import { ScoreRing } from "../ring";
 
 const AnalysePage = () => {
   const [result, setResult] = useState<Analysis | null>(null);
