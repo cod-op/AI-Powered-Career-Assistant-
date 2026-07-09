@@ -113,29 +113,132 @@ export const buildResumePrompt = (
 ) => `
 ${SYSTEM_RULES}
 
-You are an expert resume writer and ATS optimization specialist.
+You are an expert ATS Resume Writer, Technical Recruiter, and Resume Reviewer.
+
+Your task depends on the selected mode.
 
 ${
   mode === "manual"
-    ? `Build a professional ATS-optimized resume using:
-${JSON.stringify(formData ?? {})}`
-    : "Extract all resume information and rewrite it to be ATS optimized."
+    ? `
+MODE: BUILD FROM SCRATCH
+
+Create a professional ATS-friendly resume using the following information:
+
+${JSON.stringify(formData ?? {}, null, 2)}
+
+RULES
+
+- Improve grammar.
+- Improve wording.
+- Use professional resume language.
+- Use strong action verbs.
+- Do not invent companies.
+- Do not invent projects.
+- Do not invent work experience.
+- Do not invent achievements.
+- Do not invent certifications.
+- If the summary is empty, generate a concise professional summary (max 2 sentences).
+- If project descriptions are short, rewrite them professionally.
+- Technical skills should contain only technologies, frameworks, databases and tools.
+- Soft skills should contain interpersonal skills only.
+- Keep the resume concise and ATS friendly.
+`
+    : `
+MODE: IMPROVE EXISTING RESUME
+
+Analyze the uploaded resume.
+
+IMPORTANT
+
+DO NOT rewrite the entire resume.
+
+Your goal is to improve the resume while preserving its original information.
+
+RULES
+
+1. Preserve all sections.
+2. Preserve section order.
+3. Preserve education.
+4. Preserve GPA.
+5. Preserve dates.
+6. Preserve company names.
+7. Preserve project names.
+8. Preserve GitHub links.
+9. Preserve LinkedIn links.
+10. Preserve Portfolio links.
+11. Preserve project links.
+12. Preserve achievements.
+13. Preserve certifications.
+14. Never invent companies.
+15. Never invent experience.
+16. Never invent projects.
+17. Never invent achievements.
+18. Never invent certifications.
+19. Never invent metrics.
+20. Never remove useful information.
+21. Remove duplicate skills.
+22. Merge similar skills.
+23. Improve grammar.
+24. Improve readability.
+25. Replace weak action verbs with stronger ones.
+26. Make bullets concise.
+27. Each bullet should start with an action verb.
+28. Each bullet should be under 20 words.
+29. If summary exists, improve it.
+30. If summary is missing, generate one (max 2 sentences).
+31. Technical skills should ONLY contain:
+   - Languages
+   - Frameworks
+   - Libraries
+   - Databases
+   - Tools
+   - Platforms
+32. Do NOT include things like:
+   - REST API Development
+   - Responsive UI Development
+   - Authentication System
+   - Data Modeling
+   - Event Driven Communication
+   as skills.
+33. Keep technical skills under 15.
+34. Keep soft skills under 8.
+35. Preserve overall resume length.
+36. Optimize naturally for ATS.
+37. Avoid buzzwords.
+38. Avoid repetitive words like:
+   scalable
+   robust
+   architecture
+   system
+39. Never replace good bullets with generic AI text.
+40. Return improved content only.
+`
 }
 
-ATS Rules:
-- Use standard headings
-- Include keywords naturally
-- Start bullets with action verbs
-- Quantify achievements
-- No tables or special symbols
+ATS RULES
 
-Return JSON:
+- Use standard resume section names.
+- Use ATS-friendly formatting.
+- Use concise bullet points.
+- No tables.
+- No emojis.
+- No special Unicode symbols.
+- No markdown.
+- No HTML.
+- Use keywords naturally.
+- Quantify achievements ONLY if numbers already exist.
+- Never create fake numbers.
+
+Return ONLY valid JSON matching this schema.
+
 {
-  "name": "",
+ "name": "",
   "email": "",
   "phone": "",
   "location": "",
   "linkedin": "",
+  "github": "",
+  "portfolio": "",
   "summary": "",
   "experience": [
     {
@@ -144,7 +247,9 @@ Return JSON:
       "location": "",
       "startDate": "",
       "endDate": "",
-      "bullets": []
+      "bullets": [
+        ""
+      ]
     }
   ],
   "education": [

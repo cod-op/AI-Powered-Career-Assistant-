@@ -3,7 +3,7 @@ import { GoogleGenAI } from '@google/genai'
 import { AuthenticatedRequest } from '../middlewares/isAuth.js'
 import TryCatch from '../middlewares/trycatch.js'
 import User from '../models/User.js'
-import { generateInterviewPrompt, JobMatcherPrompt, ResumeAnalyserPrompt } from '../config/prompt.js'
+import { buildResumePrompt, generateInterviewPrompt, JobMatcherPrompt, ResumeAnalyserPrompt } from '../config/prompt.js'
 
 
 dotenv.config()
@@ -205,3 +205,74 @@ export const generateInterview = TryCatch(
     res.json(jsonResponse);
   }
 );
+
+
+export const buildResume = TryCatch(async (req: AuthenticatedRequest, res) => {
+  const { mode, formData, pdfBase64 } = req.body;
+
+  if (!mode){
+     return res.status(400).json({
+       message: "Mode is required" 
+      });
+    }
+
+  if (mode === "manual" && !formData)
+    return res.status(400).json({
+      message: "form data is required",
+    });
+
+  if (mode === "improve" && !pdfBase64)
+    return res.status(400).json({
+      message: "PDF is required",
+    });
+
+  const user = await User.findById(req.user?._id);
+
+  if (!user || !user.canMakeRequest()) {
+    return res.status(403).json({
+      message: "Upgrade Your plan to continue",
+    });
+  }
+
+  const parts: any[] = [{ text: buildResumePrompt(mode, formData) }];
+
+  if (mode === "improve") {
+    parts.push({
+      inlineData: {
+        mimeType: "application/pdf",
+        data: pdfBase64.replace(/^data:application\/pdf;base64,/, ""),
+      },
+    });
+  }
+
+  const response = await ai.models.generateContent({
+    model: "gemini-2.5-flash",
+    contents: [{ role: "user", parts }],
+  });
+
+  const rawText = response.text?.replace(/```json|```/g, "").trim();
+
+  if (!rawText) {
+    return res.status(500).json({
+      message: "Ai returned empty response",
+    });
+  }
+
+  let jsonResponse;
+  try {
+    jsonResponse = JSON.parse(rawText);
+  } catch (error) {
+    return res.status(500).json({
+      message: "Ai returned invailed Json",
+      rawResponse: response.text,
+    });
+  }
+
+  if (!user.hasProAccess()) {
+    user.freeRequestsUsed += 1;
+    await user.save();
+  }
+
+  res.json(jsonResponse);
+});
+

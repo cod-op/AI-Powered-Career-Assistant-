@@ -12,6 +12,7 @@ import ProtectedRoutes from "./components/ProtectedRoutes.tsx"
 import AnalysePage from "./pages/Analyse.tsx"
 import JobMatcherPage from "./pages/JobMatcher.tsx"
 import InterviewPrep from "./pages/Interview.tsx"
+import BuildResumePage from "./pages/BuildResume.tsx"
 
 const App = () => {
 
@@ -33,6 +34,7 @@ const { loading } = useAppData();
             <Route path='/analyse' element={<AnalysePage/>}></Route>
             <Route path='/jobmatcher' element={<JobMatcherPage/>}></Route>
              <Route path='/interviewprep' element={<InterviewPrep/>}></Route>
+             <Route path='/resumebuilder' element={<BuildResumePage/>}></Route>
           </Route>
           <Route path='/register' element={<Register/>}></Route>
           

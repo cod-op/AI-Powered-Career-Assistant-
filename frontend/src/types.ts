@@ -53,7 +53,7 @@ export interface Education {
   school: string;
   location: string;
   year: string;
-  gpa: string;
+  cgpa: string;
 }
 export interface Project {
   name: string;
@@ -65,12 +65,24 @@ export interface ResumeData {
   email: string;
   phone: string;
   location: string;
+
   linkedin: string;
+  github: string;
+  portfolio: string;
+
   summary: string;
+
   experience: Experience[];
+
   education: Education[];
-  skills: { technical: string[]; soft: string[] };
+
+  skills: {
+    technical: string[];
+    soft: string[];
+  };
+
   projects: Project[];
+
   certifications: string[];
 }
 
