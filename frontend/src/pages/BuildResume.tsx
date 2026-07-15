@@ -242,7 +242,7 @@ const BuildResumePage = () => {
                   onChange={(v: string) =>
                     setBasics((p) => ({ ...p, location: v }))
                   }
-                  placeholder="Ranchi, 812345"
+                  placeholder="Prayagraj, 229412"
                 />
                 <Field
                   label="Linkedin Url"
@@ -448,11 +448,11 @@ const BuildResumePage = () => {
                     />
 
                     <Field
-                      label="GPA (optional)"
+                      label="CGPA (optional)"
                       value={edu.cgpa}
                       onChange={(v: string) =>
                         setEdu((p) =>
-                          p.map((e, i) => (i === ei ? { ...e, gpa: v } : e))
+                          p.map((e, i) => (i === ei ? { ...e, cgpa: v } : e))
                         )
                       }
                       placeholder="8.5/10"

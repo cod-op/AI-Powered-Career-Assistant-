@@ -159,7 +159,7 @@ RULES
 1. Preserve all sections.
 2. Preserve section order.
 3. Preserve education.
-4. Preserve GPA.
+4. Preserve CGPA.
 5. Preserve dates.
 6. Preserve company names.
 7. Preserve project names.

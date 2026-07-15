@@ -95,7 +95,7 @@ const Navbar = () => {
               className="flex items-center gap-2 hover:opacity-80 transition-opacity"
             >
               <img
-                src="/user.png"
+                src={user?.image || "/user.png"} 
                 alt=""
                 className="w-8 h-8 rounded-full object-cover ring-2 ring-white/10"
               />

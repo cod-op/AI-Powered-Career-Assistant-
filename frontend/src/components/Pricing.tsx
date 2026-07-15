@@ -81,6 +81,7 @@ function PlanCTA({
   const handleSubscribe = async (price: any) => {
     const token = localStorage.getItem("token");
     setLoading(true);
+  try {
     let duration;
 
     if (price === "₹299") {
@@ -89,11 +90,7 @@ function PlanCTA({
       duration = 6;
     }
 
-    const {
-      data: { order },
-    } = await axios.post(
-      `${server}/api/payment/checkout`,
-      { duration },
+    const {data: { order }} = await axios.post(`${server}/api/payment/checkout`,{ duration },
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -102,7 +99,7 @@ function PlanCTA({
     );
 
     const options = {
-      key: "rzp_test_RaL8PDo9YBejEW", // Enter the Key ID generated from the Dashboard
+      key: "rzp_test_SdlEgg0PJVuvV3", // Enter the Key ID generated from the Dashboard
       amount: order.id, // Amount is in currency subunits.
       currency: "INR",
       name: "Career AI", //your business name
@@ -110,12 +107,12 @@ function PlanCTA({
       order_id: order.id, // This is a sample Order ID. Pass the `id` obtained in the response of Step 1
 
       handler: async function (response: any) {
+      
         const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
           response;
 
         try {
-          const { data } = await axios.post(
-            `${server}/api/payment/verify`,
+          const { data } = await axios.post(`${server}/api/payment/verify`,
             {
               razorpay_order_id,
               razorpay_payment_id,
@@ -134,17 +131,36 @@ function PlanCTA({
           setLoading(false);
         } catch (error: any) {
           setLoading(false);
-          toast.error(error.response.data.message);
+          toast.error(error.response?.data?.message || "Verification failed");
+          setLoading(false);
         }
       },
       theme: {
-        color: "#F#7254",
+        color:"#4F46E5",
       },
     };
 
-    const razorpay = new window.Razorpay(options);
-    razorpay.open();
-  };
+    if (!window.Razorpay) {
+          toast.error("Razorpay SDK not loaded");
+          setLoading(false);
+            return;
+       }
+
+     const razorpay = new window.Razorpay(options);
+
+      razorpay.on("payment.failed", function (response: any) {
+      console.log(response.error);
+
+      toast.error(response.error.description || "Payment Failed");
+
+       setLoading(false);
+    });
+     razorpay.open();
+  }catch (error: any) {
+    setLoading(false);
+    toast.error(error.response?.data?.message || "Something went wrong");
+  }
+};
 
   return (
     <button
