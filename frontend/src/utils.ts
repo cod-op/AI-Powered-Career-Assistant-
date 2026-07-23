@@ -293,7 +293,7 @@ export function generateResumePDF(r: ResumeData) {
         ml,
         y
       );
-      const yr = `${e.year}${e.gpa ? `  ·  GPA ${e.gpa}` : ""}`;
+      const yr = `${e.year}${e.cgpa ? `  ·  GPA ${e.cgpa}` : ""}`;
       doc
         .setFontSize(8)
         .setFont("helvetica", "normal")
