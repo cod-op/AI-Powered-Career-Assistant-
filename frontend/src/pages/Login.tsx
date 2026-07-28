@@ -68,7 +68,7 @@ const Login = () => {
   });
 
   return (
-    <div className="bg-page flex items-center justify-center p-4 ">
+    <div className="bg-page flex items-center justify-center p-4  pt-20">
         <div className="orb w-96 h-96 bg-indigo-500 -top-20 -left-20" />
       <div className="orb w-80 h-80 bg-emerald-500 bottom-10 right-0" />
       <div className="orb w-64 h-64 bg-violet-600 top-1/2 left-1/2 -translate-x-1/2" />

@@ -83,7 +83,7 @@ const JobMatcherPage = () => {
   }
 
   return (
-    <div className="bg-page min-h-screen pt-20 px-4 md:px-8 pb-12">
+    <div className="bg-page min-h-screen pt-20 px-4 md:px-8 pb-12 pt-20">
       <div className="max-w-3xl mx-auto flex flex-col gap-4">
         <div className="glass-card p-1.5 flex gap-1.5">
           {(["manual", "resume"] as const).map((m) => (
