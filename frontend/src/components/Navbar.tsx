@@ -67,23 +67,23 @@ const Navbar = () => {
 
       {open && (
         <div className="absolute top-full inset-x-0 bg-[#080b14]/95 backdrop-blur-xl border-b border-white/6 flex flex-col gap-4 px-6 py-6 md:hidden">
-          <Link to={"/analyse"} className="hover:text-white transition-colors">
+          <Link to={"/analyse"}  onClick={() => setOpen(false)} className="hover:text-white transition-colors">
             Analyse
           </Link>
           <Link
-            to={"/jobmatcher"}
+            to={"/jobmatcher"} onClick={() => setOpen(false)}
             className="hover:text-white transition-colors"
           >
             JobMatcher
           </Link>
           <Link
-            to={"/resumebuilder"}
+            to={"/resumebuilder"} onClick={() => setOpen(false)}
             className="hover:text-white transition-colors"
           >
             ResumeBuilder
           </Link>
           <Link
-            to={"/interviewprep"}
+            to={"/interviewprep"} onClick={() => setOpen(false)}
             className="hover:text-white transition-colors"
           >
             InterviewPrep
@@ -91,7 +91,7 @@ const Navbar = () => {
 
           {isAuth ? (
             <Link
-              to={"/account"}
+              to={"/account"} onClick={() => setOpen(false)}
               className="flex items-center gap-2 hover:opacity-80 transition-opacity"
             >
               <img
@@ -106,13 +106,13 @@ const Navbar = () => {
           ) : (
             <>
               <Link
-                to={"/login"}
+                to={"/login"} onClick={() => setOpen(false)}
                 className="text-sm text-white/50 hover:text-white transition-colors px-4 py-2"
               >
                 Sign in
               </Link>
               <Link
-                to={"/login"}
+                to={"/login"} onClick={() => setOpen(false)}
                 className="btn-primary text-sm px-5 py-2 rounded-lg"
               >
                 Get Started Free
