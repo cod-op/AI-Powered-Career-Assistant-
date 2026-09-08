@@ -1,4 +1,4 @@
-import mongoose,{Document,Mongoose,Schema} from "mongoose";
+import mongoose,{Document,Schema} from "mongoose";
 
 export interface  IUser extends Document{
     name:string,
@@ -21,6 +21,8 @@ const schema:Schema <IUser> = new Schema({
         type:String,
         required:true,
         unique:true,
+        lowercase: true,
+        trim: true,
     },
     password: {
     type: String,

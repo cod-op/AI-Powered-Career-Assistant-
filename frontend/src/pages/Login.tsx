@@ -54,8 +54,8 @@ const Login = () => {
       setUser(data.user);
       setIsAuth(true);
       navigate("/");
-    } catch (error) {
-      toast.error("Invalid email or password");
+    } catch (error:any) {
+      toast.error(error?.response?.data?.message || "Invalid email or password");
     } finally {
       setLoading(false);
     }

@@ -4,6 +4,7 @@ import './index.css'
 import App from './App.tsx'
 import { AppProvider } from './context/AppContext.tsx'
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import { Toaster } from "react-hot-toast";
 
 export const server="https://ai-resume-backend-7ycc.onrender.com"
 
@@ -12,6 +13,7 @@ createRoot(document.getElementById('root')!).render(
     <AppProvider>
       <GoogleOAuthProvider clientId="47353063596-jlnqm1s5mms88agte767bi36e0rdm3ps.apps.googleusercontent.com">
          <App />
+         <Toaster />
       </GoogleOAuthProvider>  
     </AppProvider>
   </StrictMode>,
