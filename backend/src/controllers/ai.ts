@@ -275,4 +275,3 @@ export const buildResume = TryCatch(async (req: AuthenticatedRequest, res) => {
 
   res.json(jsonResponse);
 });
-

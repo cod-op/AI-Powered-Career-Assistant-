@@ -1,6 +1,5 @@
-import {BarChart2,Briefcase,Compass,FileEdit,FileText,MessageSquare,ScanText} from "lucide-react";
+import { BarChart2, Briefcase, Compass, FileEdit, FileText, MessageSquare, ScanText } from "lucide-react";
 import type { Analysis, InterviewData, ResumeData } from "./types";
-import jsPDF from "jspdf";
 
 export const plans = [
   {
@@ -195,7 +194,8 @@ export async function downloadInterview(data: InterviewData) {
   doc.save(`${data.role.replace(/\s+/g, "_")}_${data.round}_interview.pdf`);
 }
 
-export function generateResumePDF(r: ResumeData) {
+export async function generateResumePDF(r: ResumeData) {
+  const { default: jsPDF } = await import("jspdf");
   const doc = new jsPDF({ unit: "mm", format: "a4" });
   const W = 210,
     ml = 15,
@@ -449,7 +449,7 @@ export function downloadReport(result: Analysis) {
     <div class="sug ${s.priority}">
       <div class="sug-hd">
         <span class="sug-cat">${s.category}</span>
-        <span class="sug-prio">${prioEmoji[s.priority]} ${s.priority}</span>
+        <span class="sug-prio">${prioEmoji[s.priority]}${s.priority}</span>
       </div>
       <div class="sug-issue">${s.issue}</div>
       <div class="sug-rec">→ ${s.recommendation}</div>
