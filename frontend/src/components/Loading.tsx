@@ -1,31 +1,52 @@
+import { FileText, Sparkles } from "lucide-react";
+
 export default function Loading() {
   return (
-    <div className="relative flex items-center justify-center min-h-screen bg-slate-950 overflow-hidden select-none">
-      <div className="absolute -top-24 -left-24 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-emerald-500/15 rounded-full blur-3xl animate-pulse delay-700" />
+    <main
+      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#080b14] px-5 text-white"
+      role="status"
+      aria-live="polite"
+      aria-label="CareerAI is getting ready"
+    >
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_42%,rgba(99,102,241,0.16),transparent_52%)]" />
+      <div className="pointer-events-none absolute -left-40 top-[-10rem] h-80 w-80 rounded-full bg-indigo-500/10 blur-3xl" />
+      <div className="pointer-events-none absolute -right-40 bottom-[-10rem] h-80 w-80 rounded-full bg-emerald-500/10 blur-3xl" />
 
-      <div className="relative z-10 flex flex-col items-center gap-6 p-8 rounded-3xl bg-slate-900/40 border border-white/10 backdrop-blur-xl shadow-2xl shadow-indigo-500/10">
-        <div className="relative flex items-center justify-center w-16 h-16">
-          <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-emerald-400 animate-spin blur-xs opacity-80" />
-          <div className="relative w-14 h-14 rounded-2xl bg-slate-950 flex items-center justify-center border border-white/10 shadow-inner">
-            <div className="w-6 h-6 rounded-lg bg-gradient-to-tr from-indigo-500 to-emerald-400 animate-pulse shadow-md shadow-indigo-500/50" />
+      <section className="relative flex w-full max-w-sm flex-col items-center rounded-3xl border border-white/10 bg-slate-900/65 px-8 py-10 text-center shadow-2xl shadow-indigo-950/40 backdrop-blur-xl sm:px-12">
+        <div className="relative mb-7 flex h-24 w-24 items-center justify-center">
+          <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-indigo-500/30 to-emerald-400/20 blur-xl" />
+          <div className="relative flex h-20 w-20 items-center justify-center rounded-[1.65rem] border border-white/10 bg-slate-950 shadow-inner shadow-white/5">
+            <FileText
+              size={34}
+              strokeWidth={1.5}
+              className="text-indigo-200"
+              aria-hidden="true"
+            />
+            <span className="absolute -right-1 -top-1 flex h-8 w-8 items-center justify-center rounded-xl border border-white/15 bg-slate-800 text-emerald-300 shadow-lg">
+              <Sparkles size={16} aria-hidden="true" />
+            </span>
           </div>
+          <span className="absolute inset-0 rounded-[2rem] border border-indigo-300/25 loading-orbit" />
         </div>
 
-        <div className="flex flex-col items-center gap-1.5 text-center">
-          <p className="text-white/90 text-base font-semibold tracking-wide">
-            CareerAI
-          </p>
-          <div className="flex items-center gap-1">
-            <span className="text-slate-400 text-xs font-medium tracking-wider uppercase">
-              Preparing your workspace
-            </span>
-            <span className="inline-flex gap-0.5 text-indigo-400 animate-pulse">
-              <span>.</span><span>.</span><span>.</span>
-            </span>
-          </div>
+        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-indigo-200/80">
+          Career<span className="text-emerald-300">AI</span>
+        </p>
+        <h1 className="mt-3 text-xl font-bold tracking-tight sm:text-2xl">
+          Your next step starts here
+        </h1>
+        <p className="mt-2 text-sm leading-6 text-slate-400">
+          Getting your career workspace ready
+        </p>
+
+        <div
+          className="mt-8 h-1 w-full overflow-hidden rounded-full bg-white/10"
+          aria-hidden="true"
+        >
+          <div className="h-full w-2/5 rounded-full bg-gradient-to-r from-indigo-400 via-purple-300 to-emerald-300 loading-sweep" />
         </div>
-      </div>
-    </div>
+        <span className="sr-only">Please wait</span>
+      </section>
+    </main>
   );
 }

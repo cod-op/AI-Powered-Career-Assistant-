@@ -121,3 +121,34 @@
 .animate-slide-up {
   animation: slideUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+
+@keyframes loadingSweep {
+  from {
+    transform: translateX(-120%);
+  }
+  to {
+    transform: translateX(250%);
+  }
+}
+
+@keyframes loadingOrbit {
+  50% {
+    transform: scale(1.08);
+    opacity: 0.45;
+  }
+}
+
+.loading-sweep {
+  animation: loadingSweep 1.6s ease-in-out infinite;
+}
+
+.loading-orbit {
+  animation: loadingOrbit 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-sweep,
+  .loading-orbit {
+    animation: none;
+  }
+}
