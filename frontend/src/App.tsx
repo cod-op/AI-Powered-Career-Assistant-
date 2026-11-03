@@ -7,7 +7,6 @@ import Navbar from "./components/Navbar.tsx";
 import Loading from "./components/Loading.tsx";
 import PublicRoutes from "./components/PublicRoutes.tsx";
 import ProtectedRoutes from "./components/ProtectedRoutes.tsx";
-import { useAppData } from "./context/AppContext.tsx";
 
 const Login = lazy(() => import("./pages/Login.tsx"));
 const Register = lazy(() => import("./pages/Register.tsx"));
@@ -18,12 +17,6 @@ const InterviewPrep = lazy(() => import("./pages/Interview.tsx"));
 const BuildResumePage = lazy(() => import("./pages/BuildResume.tsx"));
 
 const App = () => {
-  const { loading } = useAppData();
-
-  if (loading) {
-    return <Loading />;
-  }
-
   return (
     <BrowserRouter>
       {/* Whole UI/Router flow ko Suspense ke andar rakhein */}
